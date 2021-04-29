@@ -20,7 +20,7 @@ str(brexit_data)
 
 # Check for values in "Leave" column where
 # vlaue = -1
-sum(brexit_data$Leave[brexit_data$Leave == -1])
+sum(brexit_data$Leave == -1)
 
 # replace this with NA
 brexit_data$Leave[brexit_data$Leave == -1] <- NA
@@ -41,12 +41,14 @@ library(mice)
 # 10 have missing type
 md.pattern(brexit_data)
 
+# VIM
 library(VIM)
 
 # Looks like the missing values are all in this 1 column
 # for "Leave". We're not going to use it for now
 # so we'll leave it as it is
 missing_values <- aggr(brexit_data, prop = FALSE, numbers = TRUE)
+summary(missing_values)
 
 # --------------------------------------------------------------------------------------
 # Describing the brexit data
@@ -106,6 +108,7 @@ numeric_variable_list
 
 # We can use this logic to create a subset of the data
 numerical_data <- brexit_data[numeric_variable_list]
+head(numerical_data, 5)
 colnames(numerical_data)
 
 # Remove the ID field as it has no meaning
